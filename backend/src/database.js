@@ -12,7 +12,7 @@ const sequelize = new Sequelize({
 
 const Chat = sequelize.define('chats', {
     message: Sequelize.TEXT,
-    number: Sequalize.FLOAT,
+    number: Sequelize.FLOAT,
 }, {
   timestamps: true,
   instanceMethods: {

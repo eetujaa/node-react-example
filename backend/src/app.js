@@ -33,7 +33,7 @@ const listChats = async (ctx) => {
 
   }
 
-  Math.sqrt(x1^2+y1^2+z1^2)=a
+  const a = Math.sqrt( Math.pow(x1,2)+Math.pow(y1,2)+Math.pow(z1,2));
 
   let response = {
     results: chats,

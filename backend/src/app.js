@@ -24,6 +24,8 @@ const listChats = async (ctx) => {
 
   let result = await database.Chat.findAll(options);
   let chats = await Promise.all(result.map(chat => chat.toJSON()));
+  
+  let a = 0;
 
   if (chats.length > 1) {
     const x1 = chats[0].x - chats[1].x;
@@ -31,11 +33,12 @@ const listChats = async (ctx) => {
     const z1 = chats[0].z - chats[1].z;
     const timediff = chats[0].createdAt - chats[1].createdAt;
 
-    const a = Math.sqrt( Math.pow(x1,2)+Math.pow(y1,2)+Math.pow(z1,2));
+    a = Math.sqrt( Math.pow(x1,2)+Math.pow(y1,2)+Math.pow(z1,2));
   }
 
   let response = {
     results: chats,
+    a: a,
   };
 
   ctx.body = response;
@@ -44,7 +47,7 @@ const listChats = async (ctx) => {
 const createChat = async (ctx) => {
   const params = ctx.request.body;
 
-  const chat = await database.Chat.create({x: params.x, y: params.y, z: params.z, a: params.a});
+  const chat = await database.Chat.create({x: params.x, y: params.y, z: params.z});
 
   ctx.body = await chat.toJSON();
   ctx.status = 201;

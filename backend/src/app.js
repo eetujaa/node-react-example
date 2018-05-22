@@ -20,10 +20,20 @@ app.use(bodyParser());
 /** METHODS TO RESPOND TO THE ROUTES **/
 
 const listChats = async (ctx) => {
-  let options = {};
+  let options = {limit: 2};
 
   let result = await database.Chat.findAll(options);
   let chats = await Promise.all(result.map(chat => chat.toJSON()));
+
+  if (chats.length > 1) {
+    const x1 = chats[0].x - chats[1].x;
+    const y1 = chats[0].y - chats[1].y;
+    const z1 = chats[0].z - chats[1].z;
+    const timediff = chats[0].createdAt - chats[1].createdAt;
+
+  }
+
+  Math.sqrt(x1^2+y1^2+z1^2)=a
 
   let response = {
     results: chats,
@@ -35,7 +45,7 @@ const listChats = async (ctx) => {
 const createChat = async (ctx) => {
   const params = ctx.request.body;
 
-  const chat = await database.Chat.create({x: params.x, y: params.y, z: params.z});
+  const chat = await database.Chat.create({x: params.x, y: params.y, z: params.z, a: params.a});
 
   ctx.body = await chat.toJSON();
   ctx.status = 201;

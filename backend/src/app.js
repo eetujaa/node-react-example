@@ -31,9 +31,8 @@ const listChats = async (ctx) => {
     const z1 = chats[0].z - chats[1].z;
     const timediff = chats[0].createdAt - chats[1].createdAt;
 
+    const a = Math.sqrt( Math.pow(x1,2)+Math.pow(y1,2)+Math.pow(z1,2));
   }
-
-  const a = Math.sqrt( Math.pow(x1,2)+Math.pow(y1,2)+Math.pow(z1,2));
 
   let response = {
     results: chats,
